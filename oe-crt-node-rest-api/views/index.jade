@@ -1,0 +1,95 @@
+﻿extends layout
+
+block content
+  h1 Welcome to the Communities Reporter Tool REST API
+  div You can interrogate the data in JSON output for the following data:
+  
+  div
+    hr
+    h3 DATA  
+    p Get community data by indicator for all years.
+    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+       ul
+            li 
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=HTML') HTML Table
+            li
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=json') JSON
+            li 
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
+
+  hr
+  div
+    h3 PLACES  
+    p Get community data by indicator for all years.
+    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+       ul
+            li 
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=HTML') HTML Table
+            li
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=json') JSON
+            li 
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
+
+
+  hr
+  div
+    h3 INDICATORS  
+    p Get community data by indicator for all years.
+    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+       p LIST
+       ul
+            li 
+                a(href='indicators?f=HTML') HTML Table
+            li
+                a(href='indicators?f=json') JSON
+            li 
+                a(href='indicators?f=pjson') Pretty Print JSON
+       p LIST (DEEP)
+       ul
+            li 
+                a(href='indicators?deep=true&f=HTML') HTML Table
+            li
+                a(href='indicators?deep=true&f=json') JSON
+            li 
+                a(href='indicators?deep=true&f=pjson') Pretty Print JSON
+       p LIST BY TOPIC(S)
+       ul
+            li 
+                a(href='indicators?topics=Population&f=HTML') HTML Table
+            li
+                a(href='indicators?topics=Population&f=json') JSON
+            li 
+                a(href='indicators?topics=Population&f=pjson') Pretty Print JSON
+       p INDICATOR INFO
+       ul
+            li 
+                a(href='indicators?indicator=Total Population Count&f=HTML') HTML Table
+            li
+                a(href='indicators?topics=Total Population Count&f=json') JSON
+            li 
+                a(href='indicators?topics=Total Population Count&f=pjson') Pretty Print JSON
+
+  hr
+  div
+    h3 TOPICS  
+    p Get community data by indicator for all years.
+    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+       ul
+            li 
+                a(href='topics?f=HTML') HTML Table
+            li
+                a(href='topics?f=json') JSON
+            li 
+                a(href='topics?f=pjson') Pretty Print JSON
+  hr
+  div
+    h3 COLLECTIONS  
+    p Get community data by indicator for all years.
+    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+       ul
+            li 
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=HTML') HTML Table
+            li
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=json') JSON
+            li 
+                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
