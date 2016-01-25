@@ -7,22 +7,19 @@ var settings = require("../settings");
 var httpMsgs = require("../core/httpMsgs.js");
 
 /* GET home page. */
-router.get(settings.virtualDirPath, function (req, res) {
+router.get('/', function (req, res) {
     res.render('index', { title: 'Community Reporter REST API' });
 });
 
-var communityDataPath = settings.virtualDirPath + 'communityData';
-router.get(communityDataPath, function (req, res){
+router.get('/communityData', function (req, res){
     communities.get_community_data_by_indicator(req, res);    
 })
 
-var topicsPath = settings.virtualDirPath + 'topics';
-router.get(topicsPath, function (req, res){
+router.get('/topics', function (req, res){
     topics.get_topics(req, res);
 })
 
-var indicatorsPath = settings.virtualDirPath + 'indicators';
-router.get(indicatorsPath, function (req, res) {
+router.get('/indicators', function (req, res) {
     if (req.query.deep !== undefined) {
         indicators.get_all_indicators_list_deep(req, res);
     }
