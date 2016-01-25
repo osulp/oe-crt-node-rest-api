@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var http = require('http');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,11 +7,15 @@ var cookieParser = require('cookie-parser');
 var stylus = require('stylus');
 var nib = require('nib');
 var bodyParser = require('body-parser');
+var settings = require('./settings.js');
+
+settings.virtualDirPath = process.env.virtualDirPath !== undefined ? process.env.virtualDirPath : '/';
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
 var app = express();
+
 
 function compile(str, path) {
     return stylus(str)
@@ -37,8 +42,8 @@ app.use(require('stylus').middleware(
 ));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use(settings.virtualDirPath, routes);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -71,5 +76,6 @@ app.use(function (err, req, res, next) {
     });
 });
 
+//app.listen(process.env.PORT);
 
 module.exports = app;
