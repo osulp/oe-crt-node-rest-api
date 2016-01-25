@@ -26,6 +26,9 @@ router.get('/indicators', function (req, res) {
     else if (req.query.topic !== undefined) {
         indicators.get_all_indicators_list_deep(req, res);
     }
+    else if (req.query.indicator !== undefined) {
+        indicators.get_indicator(req, res);
+    }
     else {
         indicators.get_all_indicators_list(req, res);
     }    

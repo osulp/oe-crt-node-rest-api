@@ -41,7 +41,7 @@ exports.tableMarkup = function (data, addLinks, linkPath)
         html += "<tr>";
         columns.forEach(function (key) {
             //html += '<td><a href="indicators?indicator=' + row[key] + '&f=HTML">' + row[key] + '</a></td>';
-            html += '<td>' + (addLinks ? '<a href="' : "") + row[key] + (addLinks ? ('&f=HTML">' + row[key] + '</a>') : "") + '</td>';
+            html += '<td>' + (addLinks ? '<a href="' + linkPath : "") + row[key] + (addLinks ? ('&f=HTML">' + row[key] + '</a>') : "") + '</td>';
         });
         html += '</tr>';
     });
