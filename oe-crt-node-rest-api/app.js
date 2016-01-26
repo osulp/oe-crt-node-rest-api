@@ -9,7 +9,7 @@ var nib = require('nib');
 var bodyParser = require('body-parser');
 var settings = require('./settings.js');
 
-settings.virtualDirPath = process.env.virtualDirPath !== undefined ? process.env.virtualDirPath : '/';
+var virtualDirPath = settings.virtualDirPath = process.env.virtualDirPath !== undefined ? process.env.virtualDirPath : '/';
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -40,7 +40,7 @@ app.use(require('stylus').middleware(
         compile: compile
     }
 ));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(settings.virtualDirPath, routes);
 //app.use('/users', users);

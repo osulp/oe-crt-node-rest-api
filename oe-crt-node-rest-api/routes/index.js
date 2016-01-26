@@ -8,7 +8,8 @@ var httpMsgs = require("../core/httpMsgs.js");
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index', { title: 'Community Reporter REST API' });
+    var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+    res.render('index', { title: 'Community Reporter REST API', stylePath: _stylePath });
 });
 
 router.get('/communityData', function (req, res){
