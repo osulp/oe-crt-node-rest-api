@@ -16,9 +16,8 @@ exports.get_all_indicators_list = function (req, resp) {
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
-            else {
-                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
-                resp.render('dataTable', { title:"Community Reporter Indicators", table: utilities.tableMarkup(data, true, "indicators?indicator="), stylePath: _stylePath });                
+            else {                              
+                resp.render('dataTable', { title:"Community Reporter Indicators", table: utilities.tableMarkup(data, true, "indicators?indicator=") });                
             }
         }
     });
@@ -37,8 +36,7 @@ exports.get_all_indicators_list_deep = function (req, resp) {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
             else {
-                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
-                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });                 
+                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null) });
             }
         }
     });
@@ -58,9 +56,8 @@ exports.get_indicator = function (req, resp) {
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
-            else {
-                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
-                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });                                            
+            else {               
+                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null) });               
             }
         }
     });
