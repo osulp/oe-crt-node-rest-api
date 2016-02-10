@@ -17,11 +17,16 @@ exports.show500 = function (req, resp, err) {
 exports.sendJson = function (req, resp, data, format) {
     if (data) {
         settings.headers['Content-Type'] = format ==="pjson" ? "text/html" : "application/json";
-        resp.writeHead(200, settings.headers);        
-        resp.write(format === "pjson" ? ("<style> pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; } .string { color: green; } .number { color: darkorange; } .boolean { color: blue; } .null { color: magenta; } .key { color: red; }</style><pre>" 
+        resp.writeHead(200, settings.headers);
+        if (settings.isJSONP) {
+            resp.jsonp(JSON.stringify(data));
+        }
+        else {
+            resp.write(format === "pjson" ? ("<style> pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; } .string { color: green; } .number { color: darkorange; } .boolean { color: blue; } .null { color: magenta; } .key { color: red; }</style><pre>" 
             + utilities.syntaxHighlight(JSON.stringify(data, undefined, 4)) 
             + "</pre>") 
-            : JSON.stringify(data));        
+            : JSON.stringify(data));
+        } 
     }
     resp.end();
 };

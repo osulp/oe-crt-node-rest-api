@@ -4,6 +4,7 @@ var communities = require("../controllers/community_data_by_indicator");
 var topics = require("../controllers/topics");
 var indicators = require("../controllers/indicators");
 var settings = require("../settings");
+var util = require("../core/utilities");
 var httpMsgs = require("../core/httpMsgs.js");
 
 /* GET home page. */
@@ -13,14 +14,17 @@ router.get('/', function (req, res) {
 });
 
 router.get('/communityData', function (req, res){
+    util.processRequest(req);
     communities.get_community_data_by_indicator(req, res);    
 })
 
 router.get('/topics', function (req, res){
+    util.processRequest(req);
     topics.get_topics(req, res);
 })
 
 router.get('/indicators', function (req, res) {
+    util.processRequest(req);
     if (req.query.deep !== undefined) {
         indicators.get_all_indicators_list_deep(req, res);
     }

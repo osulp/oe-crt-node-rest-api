@@ -64,3 +64,8 @@ exports.sortAlphaNumeric = function(a, b) {
         return aA > bA ? -1 : 1;
     }
 }
+
+exports.processRequest = function (req)
+{
+    settings.isJSONP = req.query.callback !== "undefined" ? true : false;
+}
