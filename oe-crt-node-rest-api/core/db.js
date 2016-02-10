@@ -9,7 +9,7 @@ exports.executeSql = function (sql, callback) {
     sqlDb.execute({
         query: sql
     }).then(function (results) {
-        console.log(results);
+        //console.log(results);
         callback(results);
     }, function (err) {
         console.log("Something bad happened:", err);
