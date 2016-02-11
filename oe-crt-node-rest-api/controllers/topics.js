@@ -17,7 +17,8 @@ exports.get_topics = function (req, resp) {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
             else {
-                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null) });
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';  
+                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
             }
         }
     }, function (err) {

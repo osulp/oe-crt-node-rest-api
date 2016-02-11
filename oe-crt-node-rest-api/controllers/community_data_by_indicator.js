@@ -16,8 +16,9 @@ exports.get_community_data_by_indicator = function (req, resp) {
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
-            else {                              
-                resp.render('dataTable', { title:"Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null) });                
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';                       
+                resp.render('dataTable', { title:"Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });                
             }
         }
     });

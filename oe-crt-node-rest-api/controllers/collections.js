@@ -37,7 +37,9 @@ exports.get_community_data_by_indicator = function (req, resp) {
                     html += '</tr>';  
                 });
                 html += '</table>';
-                resp.render('dataTable', { title:"Community Data by Indicator Table", table: html });                
+                
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';                              
+                resp.render('dataTable', { title:"Community Data by Indicator Table", table: html, stylePath: _stylePath });             
             }
         }
     });

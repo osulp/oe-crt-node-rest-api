@@ -18,7 +18,7 @@ exports.sendJson = function (req, resp, data, format) {
     if (data) {
         settings.headers['Content-Type'] = format ==="pjson" ? "text/html" : "application/json";       
         if (settings.isJSONP) {
-           resp.jsonp(JSON.stringify(data));
+           resp.status(200).jsonp(JSON.stringify(data));
         }
         else {
             resp.writeHead(200, settings.headers);
