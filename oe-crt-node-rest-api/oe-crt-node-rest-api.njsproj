@@ -30,6 +30,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controllers\search_places_indicators.js" />
     <Compile Include="controllers\topics.js" />
     <Compile Include="controllers\indicators.js" />
     <Compile Include="controllers\places.js" />

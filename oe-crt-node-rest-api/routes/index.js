@@ -3,6 +3,7 @@ var router = express.Router();
 var communities = require("../controllers/community_data_by_indicator");
 var topics = require("../controllers/topics");
 var indicators = require("../controllers/indicators");
+var search = require("../controllers/search_places_indicators");
 var settings = require("../settings");
 var util = require("../core/utilities");
 var httpMsgs = require("../core/httpMsgs.js");
@@ -21,6 +22,11 @@ router.get('/communityData', function (req, res){
 router.get('/topics', function (req, res){
     util.processRequest(req);
     topics.get_topics(req, res);
+})
+
+router.get('/search', function (req, res) {
+    util.processRequest(req);
+    search.search(req, res);
 })
 
 router.get('/indicators', function (req, res) {

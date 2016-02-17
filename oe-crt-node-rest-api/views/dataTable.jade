@@ -2,5 +2,7 @@
 
 block content
   h1= title  
+  - timestamp = new Date().toDateString();
+  time= timestamp
   :verbatim
    !{table}
