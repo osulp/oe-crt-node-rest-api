@@ -4,9 +4,9 @@ var httpMsgs = require("../core/httpMsgs");
 var utilities = require("../core/utilities");
 var format = "json";
 
-exports.get_community_data_by_indicator = function (req, resp) {       
+exports.get = function (req, resp) {       
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec getCommunityData '" + req.query.geoids + "', '" + req.query.indicators + "';", 
+    db.executeSql("select * from Collections;", 
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
@@ -39,21 +39,8 @@ exports.get_community_data_by_indicator = function (req, resp) {
                 html += '</table>';
                 
                 var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';                              
-                resp.render('dataTable', { title:"Community Data by Indicator Table", table: html, stylePath: _stylePath });             
+                resp.render('dataTable', { title:"Collections", table: html, stylePath: _stylePath });             
             }
-        }
-    });
-
-}
-
-exports.get = function (req, resp, community) {
-    
-    db.executeSql("Select * from Communities", function (data, err) {
-        if (err) {
-            httpMsgs.show500(req, resp, err);
-        }
-        else {
-            httpMsgs.sendJson(req, resp, data);
         }
     });
 

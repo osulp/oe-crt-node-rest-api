@@ -20,8 +20,8 @@ block content
   hr
   div
     h3 PLACES  
-    p Get community data by indicator for all years.
-    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+    p Get list of places or specify a place to get more details about it.
+    p For example, adding place=Corvallis to the url will bring back a description for the place Corvallis.
        ul
             li 
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=HTML') HTML Table
@@ -72,8 +72,7 @@ block content
   hr
   div
     h3 TOPICS  
-    p Get community data by indicator for all years.
-    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+    p Get a list of all topics.    
        ul
             li 
                 a(href='topics?f=HTML') HTML Table
@@ -84,12 +83,11 @@ block content
   hr
   div
     h3 COLLECTIONS  
-    p Get community data by indicator for all years.
-    p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+    p Get list of collections.  A collection is a sponsored subset of indicators to highlight collection specific themes.    
        ul
             li 
-                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=HTML') HTML Table
+                a(href='collections?f=HTML') HTML Table
             li
-                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=json') JSON
+                a(href='collections?f=json') JSON
             li 
-                a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
+                a(href='collections?f=pjson') Pretty Print JSON

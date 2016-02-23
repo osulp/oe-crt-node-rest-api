@@ -1,5 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
+//controllers
+var collections = require("../controllers/collections");
 var communities = require("../controllers/community_data_by_indicator");
 var topics = require("../controllers/topics");
 var indicators = require("../controllers/indicators");
@@ -17,6 +19,11 @@ router.get('/', function (req, res) {
 router.get('/communityData', function (req, res){
     util.processRequest(req);
     communities.get_community_data_by_indicator(req, res);    
+})
+
+router.get('/collections', function (req, res) {
+    util.processRequest(req);
+    collections.get(req, res);
 })
 
 router.get('/topics', function (req, res){
