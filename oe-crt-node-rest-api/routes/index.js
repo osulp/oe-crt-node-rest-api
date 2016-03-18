@@ -4,6 +4,7 @@ var router = express.Router();
 var collections = require("../controllers/collections");
 var communities = require("../controllers/community_data_by_indicator");
 var topics = require("../controllers/topics");
+var places = require("../controllers/places");
 var indicators = require("../controllers/indicators");
 var search = require("../controllers/search_places_indicators");
 var settings = require("../settings");
@@ -29,6 +30,11 @@ router.get('/collections', function (req, res) {
 router.get('/topics', function (req, res){
     util.processRequest(req);
     topics.get_topics(req, res);
+})
+
+router.get('/places', function (req, res) {
+    util.processRequest(req);
+    places.getPlaces(req, res);
 })
 
 router.get('/search', function (req, res) {

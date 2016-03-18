@@ -4,41 +4,21 @@ var httpMsgs = require("../core/httpMsgs");
 var utilities = require("../core/utilities");
 var format = "json";
 
-exports.get_community_data_by_indicator = function (req, resp) {       
+exports.getPlaces = function (req, resp) {       
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec getCommunityData '" + req.query.geoids + "', '" + req.query.indicators + "';", 
+    db.executeSql("exec searchPlacesAndIndicators '" + req.query.term + "', 'Place';", 
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
         }
         else {
-
+            
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
-            else {              
-                var html = '<table id="dataTable"><tr>';
-                var counter = 0;
-                var columns;
-                data.some(function (row) {
-                    columns = Object.keys(row).sort(utilities.sortAlphaNumeric);
-                    return counter === 0
-                });               
-                columns.forEach(function (column) {
-                    html += '<th>' + column + '</th>';
-                });
-                html += '</tr>';
-
-                data.forEach(function (row) {
-                    html += "<tr>";
-                    columns.forEach(function (key) {                        
-                        html += '<td>' + row[key] + '</td>';
-                    });                    
-                    html += '</tr>';  
-                });
-                html += '</table>';
-                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';  
-                resp.render('dataTable', { title:"Community Data by Indicator Table", table: html, stylePath: _stylePath });                
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "Search Places and Indicators", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
             }
         }
     });
