@@ -8,7 +8,7 @@
   "description": "oe-crt-node-rest-api",
   "author": {
     "name": "rempelma",
-    "email": ""
+    "email": "marc.rempel@oregonstate.edu"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
