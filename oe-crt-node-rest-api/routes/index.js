@@ -20,7 +20,13 @@ router.get('/', function (req, res) {
 
 router.get('/communityData', function (req, res){
     util.processRequest(req);
-    communities.get_community_data_by_indicator(req, res);    
+    if (req.query.geoType !== undefined) {
+        communities.get_community_data_by_indicator_geoType(req, res);
+    }
+    else {
+        communities.get_community_data_by_indicator(req, res);
+    }
+
 })
 
 router.get('/collections', function (req, res) {

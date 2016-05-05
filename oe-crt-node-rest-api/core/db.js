@@ -7,7 +7,8 @@ exports.executeSql = function (sql, callback) {
     sqlDb.setDefaultConfig(settings.dbConfig);
     
     sqlDb.execute({
-        query: sql
+        query: sql,
+        multiple: true
     }).then(function (results) {
         //console.log(results);
         callback(results);

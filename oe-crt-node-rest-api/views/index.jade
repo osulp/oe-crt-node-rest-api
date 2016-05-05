@@ -9,6 +9,7 @@ block content
     h3 DATA  
     p Get community data by indicator for all years.
     p Query is based on geoids and indicator names.  For example, adding geoids=41003,41005 to the url will bring back data for those two places.  Likewise for indicators, indicators=Poverty Rate, Total Population Count.
+       P For specified geoids
        ul
             li 
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=HTML') HTML Table
@@ -16,6 +17,14 @@ block content
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=json') JSON
             li 
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
+       P For specified geoType
+       ul
+            li 
+                a(href='communityData?geoType=County&indicator=Poverty Rate&f=HTML') HTML Table
+            li
+                a(href='communityData?geoType=County&indicator=Poverty Rate&f=json') JSON
+            li 
+                a(href='communityData?geoType=County&indicator=Poverty Rate&f=pjson') Pretty Print JSON
 
   hr
   div
