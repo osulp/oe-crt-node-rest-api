@@ -6,7 +6,7 @@ var format = "json";
 
 exports.get_community_data_by_indicator = function (req, resp) {       
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec getCommunityData '" + req.query.geoids + "', '" + req.query.indicators + "';", 
+    db.executeSql("exec getCommunityData '" + req.query.geoids + "', '" + req.query.indicators + "';", false, 
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
@@ -26,7 +26,7 @@ exports.get_community_data_by_indicator = function (req, resp) {
 
 exports.get_community_data_by_indicator_geoType = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSqlMultiTable("exec getIndicatorData '" + req.query.indicator + "', '" + req.query.geoType + "';", 
+    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '" + req.query.geoType + "';", true, 
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);

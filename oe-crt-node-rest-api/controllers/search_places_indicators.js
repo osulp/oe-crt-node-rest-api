@@ -7,7 +7,7 @@ var format = "json";
 exports.search = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
 
-    db.executeSql("exec searchPlacesAndIndicators '" + req.query.term + "';", 
+    db.executeSql("exec searchPlacesAndIndicators '" + req.query.term + "';", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);

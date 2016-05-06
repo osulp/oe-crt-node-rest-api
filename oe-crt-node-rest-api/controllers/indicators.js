@@ -6,7 +6,7 @@ var format = "json";
 
 exports.get_all_indicators_list = function (req, resp) {       
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("select Variable 'Indicator', Topic 'Topics', 'ChartDisplay' = case when ScriptName IS NULL then 'default' else ScriptName end  from VariableDesc as vd join Topics as t on t.Topic_ID = vd.Topic_ID where UPPER(Show) is NULL or UPPER(Show) like 'YES' order by Topics asc, Indicator asc;", 
+    db.executeSql("select Variable 'Indicator', Topic 'Topics', 'ChartDisplay' = case when ScriptName IS NULL then 'default' else ScriptName end  from VariableDesc as vd join Topics as t on t.Topic_ID = vd.Topic_ID where UPPER(Show) is NULL or UPPER(Show) like 'YES' order by Topics asc, Indicator asc;", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
@@ -26,7 +26,7 @@ exports.get_all_indicators_list = function (req, resp) {
 
 exports.get_all_indicators_list_deep = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("select * from VariableDesc where UPPER(Show) is NULL or UPPER(Show) like 'YES' ;", 
+    db.executeSql("select * from VariableDesc where UPPER(Show) is NULL or UPPER(Show) like 'YES' ;", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
@@ -48,7 +48,7 @@ exports.get_all_indicators_list_deep = function (req, resp) {
 exports.get_indicator = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     var indicator = req.query.indicator !== undefined ? req.query.indicator : "%";
-    db.executeSql("select * from VariableDesc where (UPPER(Show) is NULL or UPPER(Show) like 'YES') and Variable like '" + indicator + "';", 
+    db.executeSql("select * from VariableDesc where (UPPER(Show) is NULL or UPPER(Show) like 'YES') and Variable like '" + indicator + "';", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
