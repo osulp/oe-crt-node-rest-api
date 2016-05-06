@@ -26,7 +26,7 @@ exports.get_community_data_by_indicator = function (req, resp) {
 
 exports.get_community_data_by_indicator_geoType = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '" + req.query.geoType + "';", 
+    db.executeSqlMultiTable("exec getIndicatorData '" + req.query.indicator + "', '" + req.query.geoType + "';", 
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);

@@ -7,6 +7,20 @@ exports.executeSql = function (sql, callback) {
     sqlDb.setDefaultConfig(settings.dbConfig);
     
     sqlDb.execute({
+        query: sql        
+    }).then(function (results) {
+        //console.log(results);
+        callback(results);
+    }, function (err) {
+        console.log("Something bad happened:", err);
+        callback(null, err);
+    });
+};
+
+exports.executeSqlMultiTable = function (sql, callback) {
+    sqlDb.setDefaultConfig(settings.dbConfig);
+    
+    sqlDb.execute({
         query: sql,
         multiple: true
     }).then(function (results) {
