@@ -88,7 +88,7 @@ block content
   hr
   div
     h3 TOPICS  
-    p Get a list of all topics.    
+    p Get a list of all OLD topics.    
        ul
             li 
                 a(href='topics?f=HTML') HTML Table
@@ -96,6 +96,14 @@ block content
                 a(href='topics?f=json') JSON
             li 
                 a(href='topics?f=pjson') Pretty Print JSON
+    p Get a list of all CRT (NEW) topics.    
+       ul
+            li 
+                a(href='topics?crt=true&f=HTML') HTML Table
+            li
+                a(href='topics?crt=true&f=json') JSON
+            li 
+                a(href='topics?crt=true&f=pjson') Pretty Print JSON
   hr
   div
     h3 COLLECTIONS  

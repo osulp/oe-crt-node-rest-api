@@ -36,7 +36,13 @@ router.get('/collections', function (req, res) {
 
 router.get('/topics', function (req, res){
     util.processRequest(req);
-    topics.get_topics(req, res);
+    if (req.query.crt !== undefined) {
+        //new crt topics
+        topics.get_crt_topics(req, res);
+    } else {
+        //old crt topics with domains
+        topics.get_topics(req, res);
+    }
 })
 
 router.get('/places', function (req, res) {

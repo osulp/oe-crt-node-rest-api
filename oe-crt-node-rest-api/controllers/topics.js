@@ -26,3 +26,27 @@ exports.get_topics = function (req, resp) {
     });
 
 }
+
+exports.get_crt_topics = function (req, resp) {
+    settings.format = req.query.f !== "undefined" ? req.query.f : "json";
+    
+    db.executeSql("select crt_topic_name as Topic from CRT_Topics", false,
+        function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        }
+        else {
+            if (settings.format === "json" || settings.format === "pjson") {
+                httpMsgs.sendJson(req, resp, data, settings.format);
+            }
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "CRT Topics", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+            }
+        }
+    }, function (err) {
+        alert(err);
+    });
+
+}
+
