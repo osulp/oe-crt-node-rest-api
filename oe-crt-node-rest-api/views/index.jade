@@ -18,13 +18,17 @@ block content
             li 
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
        P For specified geoType
-       ul
-            li 
-                a(href='communityData?geoType=County&indicator=Poverty Rate&f=HTML') HTML Table
+       ul            
             li
                 a(href='communityData?geoType=County&indicator=Poverty Rate&f=json') JSON
             li 
                 a(href='communityData?geoType=County&indicator=Poverty Rate&f=pjson') Pretty Print JSON
+       P With metadata for 'basic' view
+       ul            
+            li
+                a(href='communityData?geoids=41003,41005&indicator=Poverty Rate&viewType=basic&f=json') JSON
+            li 
+                a(href='communityData?geoids=41003,41005&indicator=Poverty Rate&viewType=basic&f=pjson') Pretty Print JSON
 
   hr
   div

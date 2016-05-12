@@ -23,6 +23,9 @@ router.get('/communityData', function (req, res){
     if (req.query.geoType !== undefined) {
         communities.get_community_data_by_indicator_geoType(req, res);
     }
+    else if (req.query.viewType === 'basic') {
+        communities.get_community_data_by_indicator_with_metadata(req, res);
+    }
     else {
         communities.get_community_data_by_indicator(req, res);
     }
