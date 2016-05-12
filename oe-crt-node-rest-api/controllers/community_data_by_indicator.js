@@ -35,10 +35,11 @@ exports.get_community_data_by_indicator_geoType = function (req, resp) {
             var returnObj = {};
             returnObj.Metadata = data[0];
             returnObj.Years = data[1];
-            returnObj.Data = data[2];
-            returnObj.RelatedIndicators = data.length > 3 ? data[3] : null;
-            returnObj.SubTopicCategories = data.length > 4 ? data[4]: null;
-            returnObj.TopicCategories = data.length > 5 ? data[5]: null;
+            returnObj.GeoTypes = data[3];
+            returnObj.Data = data[2];            
+            returnObj.RelatedIndicators = data.length > 4 ? data[4] : null;
+            returnObj.SubTopicCategories = data.length > 5 ? data[5]: null;
+            returnObj.TopicCategories = data.length > 6 ? data[6]: null;
             
             
             if (settings.format === "json" || settings.format === "pjson") {
@@ -50,7 +51,35 @@ exports.get_community_data_by_indicator_geoType = function (req, resp) {
             }
         }
     });
+}
 
+exports.get_community_data_by_indicator_with_metadata = function (req, resp) {
+    settings.format = req.query.f !== "undefined" ? req.query.f : "json";
+    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '" + req.query.geoType + "';", true, 
+        function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        }
+        else {
+            var returnObj = {};
+            returnObj.Metadata = data[0];
+            returnObj.Years = data[1];
+            returnObj.Data = data[2];
+            returnObj.GeoTypes = data[3];
+            returnObj.RelatedIndicators = data.length > 4 ? data[4] : null;
+            returnObj.SubTopicCategories = data.length > 5 ? data[5]: null;
+            returnObj.TopicCategories = data.length > 6 ? data[6]: null;
+            
+            
+            if (settings.format === "json" || settings.format === "pjson") {
+                httpMsgs.sendJson(req, resp, returnObj, settings.format);
+            }
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "Community Data by Indicator by GeoType Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+            }
+        }
+    });
 }
 
 exports.get = function (req, resp, community) {
