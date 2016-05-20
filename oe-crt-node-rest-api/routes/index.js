@@ -5,6 +5,7 @@ var collections = require("../controllers/collections");
 var communities = require("../controllers/community_data_by_indicator");
 var topics = require("../controllers/topics");
 var places = require("../controllers/places");
+var place_types = require("../controllers/placetypes");
 var geojson = require("../controllers/geojson");
 var indicators = require("../controllers/indicators");
 var search = require("../controllers/search_places_indicators");
@@ -51,6 +52,11 @@ router.get('/topics', function (req, res){
 router.get('/places', function (req, res) {
     util.processRequest(req);
     places.getPlaces(req, res);
+})
+
+router.get('/placetypes', function (req, res) {
+    util.processRequest(req);    
+    place_types.getPlaceTypeGeoYears(req, res);
 })
 
 router.get('/geojson', function (req, res) {

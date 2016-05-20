@@ -4,7 +4,7 @@ var httpMsgs = require("../core/httpMsgs");
 var utilities = require("../core/utilities");
 var format = "json";
 
-exports.getPlaces = function (req, resp) {       
+exports.getPlaces = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     db.executeSql("exec searchPlacesAndIndicators '" + req.query.term + "', 'Place';", false,
         function (data, err) {
