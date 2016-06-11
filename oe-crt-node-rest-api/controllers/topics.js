@@ -30,7 +30,7 @@ exports.get_topics = function (req, resp) {
 exports.get_crt_topics = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     
-    db.executeSql("select crt_topic_name as topic from CRT_Topics", false,
+    db.executeSql("select crt_topic_name as topic, crt_topic_icon 'icon' from CRT_Topics", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
