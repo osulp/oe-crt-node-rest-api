@@ -6,7 +6,7 @@ var format = "json";
 
 exports.get = function (req, resp) {       
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("select * from Collections;", false,
+    db.executeSql("exec getCollections;", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
