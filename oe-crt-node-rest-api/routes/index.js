@@ -19,18 +19,15 @@ router.get('/', function (req, res) {
     res.render('index', { title: 'Community Reporter REST API', stylePath: _stylePath });
 });
 
-router.get('/communityData', function (req, res){
+router.get('/communityData', function (req, res) {
     util.processRequest(req);
     if (req.query.geoType !== undefined) {
         communities.get_community_data_by_indicator_geoType(req, res);
-    }
-    else if (req.query.viewType === 'basic') {
-        communities.get_community_data_by_indicator_with_metadata(req, res);
-    }
-    else {
+    } else if (req.query.viewType !== undefined) {
+        communities.get_community_data_by_indicator_with_metadata(req, res, req.query.viewType);
+    } else {
         communities.get_community_data_by_indicator(req, res);
     }
-
 })
 
 router.get('/collections', function (req, res) {
