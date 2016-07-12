@@ -52,7 +52,7 @@ router.get('/places', function (req, res) {
 })
 
 router.get('/placetypes', function (req, res) {
-    util.processRequest(req);    
+    util.processRequest(req);
     place_types.getPlaceTypeGeoYears(req, res);
 })
 
@@ -75,11 +75,11 @@ router.get('/indicators', function (req, res) {
         indicators.get_all_indicators_list_deep(req, res);
     }
     else if (req.query.indicator !== undefined) {
-        indicators.get_indicator(req, res);
+        indicators.get_indicator_desc_and_related(req, res);
     }
     else {
         indicators.get_all_indicators_list(req, res);
-    }    
+    }
 })
 
 module.exports = router;
