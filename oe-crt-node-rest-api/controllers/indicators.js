@@ -47,7 +47,7 @@ exports.get_all_indicators_list_deep = function (req, resp) {
 exports.get_indicator = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     var indicator = req.query.indicator !== undefined ? req.query.indicator : "%";
-    db.executeSql("select * from VariableDesc where ((UPPER(Show) is NULL or UPPER(Show) like 'YES') or (is10YrPlan = 1)) and Variable like '" + indicator + "';", false,
+    db.executeSql("select * from VariableDesc where ((UPPER(Show) is NULL or UPPER(Show) like 'YES') or (is10YrPlan = 1)) and Variable like '" + indicator + "' or Dashboard_Chart_Title like '" + indicator + ";", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
@@ -69,7 +69,7 @@ exports.get_indicator = function (req, resp) {
 exports.get_indicator_desc_and_related = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     var indicator = req.query.indicator !== undefined ? req.query.indicator : "%";
-    db.executeSql("select * from VariableDesc where ((UPPER(Show) is NULL or UPPER(Show) like 'YES') or (is10YrPlan = 1)) and Variable like '" + indicator + "'; select vd2.Variable 'related_indicators' from RelatedIndicators as ri join VariableDesc as vd on ri.indicator_id = vd.Variable_ID join VariableDesc as vd2 on ri.related_indicator_id = vd2.Variable_ID where vd.Variable like '" + indicator + "';", true,
+    db.executeSql("select * from VariableDesc where ((UPPER(Show) is NULL or UPPER(Show) like 'YES') or (is10YrPlan = 1)) and (Variable like '" + indicator + "' or Dashboard_Chart_Title like '"+indicator+"'); select vd2.Variable 'related_indicators' from RelatedIndicators as ri join VariableDesc as vd on ri.indicator_id = vd.Variable_ID join VariableDesc as vd2 on ri.related_indicator_id = vd2.Variable_ID where vd.Variable like '" + indicator + "';", true,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
