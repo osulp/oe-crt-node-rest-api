@@ -59,7 +59,7 @@ exports.get_community_data_by_indicator_with_metadata = function (req, resp, vie
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     //PARAMS for getIndicatorData in order: 1. indicator, 2.geotypes(adv view only,3.geoids(basic view only),4.geonames(basic view only) Not currently used,5.viewType (basic/advanced)
 
-    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '','" + req.query.geoids + "','" + (req.query.geonames !== "undefined" ? req.query.geonames : '') + "', '" + viewType + "','db';", true,
+    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '','" + req.query.geoids + "','" + (req.query.geonames !== "undefined" ? req.query.geonames : '') + "', '" + viewType + "';", true,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
