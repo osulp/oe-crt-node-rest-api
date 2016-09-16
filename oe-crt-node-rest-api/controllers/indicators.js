@@ -66,6 +66,27 @@ exports.get_indicator = function (req, resp) {
 
 }
 
+exports.get_featured_indicators = function (req, resp) {
+    settings.format = req.query.f !== "undefined" ? req.query.f : "json";
+    db.executeSql("exec getFeaturedIndicators", false,
+        function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        }
+        else {
+
+            if (settings.format === "json" || settings.format === "pjson") {
+                httpMsgs.sendJson(req, resp, data, settings.format);
+            }
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "Featured Indicators", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+            }
+        }
+    });
+
+}
+
 exports.get_indicator_desc_and_related = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     var indicator = req.query.indicator !== undefined ? req.query.indicator : "%";

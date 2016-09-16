@@ -77,6 +77,9 @@ router.get('/indicators', function (req, res) {
     else if (req.query.indicator !== undefined) {
         indicators.get_indicator_desc_and_related(req, res);
     }
+    else if (req.query.featured !== undefined) {
+        indicators.get_featured_indicators(req, res);
+    }
     else {
         indicators.get_all_indicators_list(req, res);
     }
