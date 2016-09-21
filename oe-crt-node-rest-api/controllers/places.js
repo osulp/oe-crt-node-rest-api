@@ -12,7 +12,7 @@ exports.getPlaces = function (req, resp) {
             httpMsgs.show500(req, resp, err);
         }
         else {
-            
+
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, data, settings.format);
             }
@@ -22,11 +22,30 @@ exports.getPlaces = function (req, resp) {
             }
         }
     });
+}
+
+exports.getPlaceInfo = function (req, resp) {
+    settings.format = req.query.f !== "undefined" ? req.query.f : "json";
+    db.executeSql("exec getPlaceInfo '" + req.query.place + "';", false,
+        function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        }
+        else {
+            if (settings.format === "json" || settings.format === "pjson") {
+                httpMsgs.sendJson(req, resp, data, settings.format);
+            }
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "Get Place Info", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+            }
+        }
+    });
 
 }
 
 exports.get = function (req, resp, community) {
-    
+
     db.executeSql("Select * from Communities", false, function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);

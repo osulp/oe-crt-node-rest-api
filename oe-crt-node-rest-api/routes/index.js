@@ -48,7 +48,11 @@ router.get('/topics', function (req, res){
 
 router.get('/places', function (req, res) {
     util.processRequest(req);
-    places.getPlaces(req, res);
+    if (req.query.place !== undefined) {
+        places.getPlaceInfo(req, res);
+    } else {
+        places.getPlaces(req, res);
+    }
 })
 
 router.get('/placetypes', function (req, res) {

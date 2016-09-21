@@ -42,6 +42,7 @@ block content
     h3 PLACES
     p Get list of places or specify a place to get more details about it.
     p For example, adding place=Corvallis to the url will bring back a description for the place Corvallis.
+       p ALL PLACES
        ul
             li
                 a(href='places?term=Cor&f=HTML') HTML Table
@@ -49,6 +50,14 @@ block content
                 a(href='places?term=Cor&f=json') JSON
             li
                 a(href='places?term=Cor&f=pjson') Pretty Print JSON
+       p Place Information (Geo shift, county, school district, years)
+       ul
+            li
+                a(href='places?place=Corvallis&f=HTML') HTML Table
+            li
+                a(href='places?place=Corvallis&f=json') JSON
+            li
+                a(href='places?place=Corvallis&f=pjson') Pretty Print JSON
   hr
   div
     h3 PLACES TYPES - Geo Years
