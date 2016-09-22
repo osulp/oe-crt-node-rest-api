@@ -12,6 +12,7 @@ var search = require("../controllers/search_places_indicators");
 var settings = require("../settings");
 var util = require("../core/utilities");
 var httpMsgs = require("../core/httpMsgs.js");
+var school_data = require('../controllers/school_data');
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -69,6 +70,15 @@ router.get('/search', function (req, res) {
     util.processRequest(req);
     search.search(req, res);
 })
+
+router.get('/schools', function (req, res) {
+    util.processRequest(req);
+    if (req.query.schooldistrict) {
+        school_data.get_school_distict_data(req, res);
+    }
+})
+
+
 
 router.get('/indicators', function (req, res) {
     util.processRequest(req);
