@@ -6,7 +6,7 @@ var format = "json";
 
 exports.get_school_distict_data = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec getSchoolDistrictData_CRT  '" + req.query.schooldists + "', '" + req.query.indicator + "';", true,
+    db.executeSql("exec getSchoolDistrictData_CRT  '" + req.query.schooldists + "', '" + req.query.indicator + "', '" + (req.query.counties !== undefined ? req.query.counties : '') + "', '" + (req.query.cts !== undefined ? req.query.cts : '') + "';", true,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
