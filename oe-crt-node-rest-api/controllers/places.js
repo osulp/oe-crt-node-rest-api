@@ -6,7 +6,7 @@ var format = "json";
 
 exports.getPlaces = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec searchPlacesAndIndicators '" + req.query.term + "', 'Place';", false,
+    db.executeSql("exec searchPlacesAndIndicators '" + req.query.term.replace(/\'/g, "''")  + "', 'Place';", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
@@ -26,7 +26,7 @@ exports.getPlaces = function (req, resp) {
 
 exports.getPlaceInfo = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
-    db.executeSql("exec getPlaceInfo '" + req.query.place + "';", false,
+    db.executeSql("exec getPlaceInfo '" + req.query.place.replace(/\'/g, "''")  + "';", false,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);

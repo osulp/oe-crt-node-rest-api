@@ -16,17 +16,28 @@ exports.show500 = function (req, resp, err) {
 
 exports.sendJson = function (req, resp, data, format) {
     if (data) {
-        settings.headers['Content-Type'] = format ==="pjson" ? "text/html" : "application/json";       
+        settings.headers['Content-Type'] = format ==="pjson" ? "text/html" : "application/json";
         if (settings.isJSONP) {
            resp.status(200).jsonp(JSON.stringify(data));
         }
         else {
             resp.writeHead(200, settings.headers);
-            resp.write(format === "pjson" ? ("<style> pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; } .string { color: green; } .number { color: darkorange; } .boolean { color: blue; } .null { color: magenta; } .key { color: red; }</style><pre>" 
-            + utilities.syntaxHighlight(JSON.stringify(data, undefined, 4)) 
-            + "</pre>") 
+            resp.write(format === "pjson" ? ("<style> pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; } .string { color: green; } .number { color: darkorange; } .boolean { color: blue; } .null { color: magenta; } .key { color: red; }</style><pre>"
+            + utilities.syntaxHighlight(JSON.stringify(data, undefined, 4))
+            + "</pre>")
             : JSON.stringify(data));
-        } 
+        }
+    }
+    resp.end();
+};
+
+exports.sendCSV = function (req, resp, data) {
+    if (data) {
+        settings.headers['Content-Type'] = "text/csv";
+        settings.headers['Content-Disposition'] = 'attachment; filename=report.csv';
+        resp.writeHead(200, settings.headers);
+        var csvData = utilities.ConvertToCSV(data);
+        resp.write(csvData);
     }
     resp.end();
 };

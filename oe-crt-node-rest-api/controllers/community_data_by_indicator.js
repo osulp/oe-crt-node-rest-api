@@ -15,8 +15,9 @@ exports.get_community_data_by_indicator = function (req, resp) {
 
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, data, settings.format);
-            }
-            else {
+            } else if (settings.format === "csv") {
+                httpMsgs.sendCSV(req, resp, data);
+            } else {
                 var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
                 resp.render('dataTable', { title:"Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
             }
@@ -59,7 +60,7 @@ exports.get_community_data_by_indicator_with_metadata = function (req, resp, vie
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     //PARAMS for getIndicatorData in order: 1. indicator, 2.geotypes(adv view only,3.geoids(basic view only),4.geonames(basic view only) Not currently used,5.viewType (basic/advanced)
 
-    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '','" + req.query.geoids + "','" + (req.query.geonames !== "undefined" ? req.query.geonames : '') + "', '" + viewType + "';", true,
+    db.executeSql("exec getIndicatorData '" + req.query.indicator + "', '','" + req.query.geoids + "','" + (req.query.geonames !== "undefined" ? req.query.geonames.replace(/\'/g, "''")  : '') + "', '" + viewType + "';", true,
         function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
