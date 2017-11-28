@@ -17,6 +17,8 @@ block content
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=json') JSON
             li
                 a(href='communityData?geoids=41003,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=pjson') Pretty Print JSON
+            li
+                a(href='communityData?geoids=41017000100,41005,41007&indicators=Poverty Rate,Total Population Estimate&f=csv') csv
        P For specified geoType
        ul
             li
@@ -154,3 +156,16 @@ block content
                 a(href='schools?schooldistrict=1&schooldists=Corvallis SD 509J,Statewide&indicator=Percentage of 3rd Graders who met Reading Requirement&f=json') JSON
             li
                 a(href='schools?schooldistrict=1&schooldists=Corvallis SD 509J,Statewide&indicator=Percentage of 3rd Graders who met Reading Requirement&f=pjson') Pretty Print JSON
+
+  div
+    h3 REPORTS
+    p Downloadable reports for Admin Tool
+       ul
+            li
+                a(href='reports?reportType=year_indicators&year=1990&f=csv') All indicators for 1990 as CSV
+            li
+                a(href='reports?reportType=year_variables&year=1990&f=csv') All variable data records for 1990 as CSV
+            li
+                a(href='reports?reportType=all_year_indicator&varIndicator=Total%20Population%20Estimate&f=csv') Add data for indicator Total Population Estimate as CSV
+            li
+                a(href='reports?reportType=all_year_variable&varIndicator=%23%205%2B%20in%20linguistically%20isolated%20HHs&f=csv') All data for variable data # 5+ in linguistically isolated HHs as CSV

@@ -9,12 +9,13 @@ var nib = require('nib');
 var bodyParser = require('body-parser');
 var settings = require('./settings.js');
 
+
 var virtualDirPath = settings.virtualDirPath = process.env.virtualDirPath !== undefined ? process.env.virtualDirPath : '/';
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 
-var app = express();
+var app = module.exports = express();
 
 
 function compile(str, path) {
@@ -52,6 +53,7 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
+
 
 // error handlers
 

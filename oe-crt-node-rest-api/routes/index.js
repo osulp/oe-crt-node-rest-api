@@ -13,6 +13,7 @@ var settings = require("../settings");
 var util = require("../core/utilities");
 var httpMsgs = require("../core/httpMsgs.js");
 var school_data = require('../controllers/school_data');
+var reports = require('../controllers/reports');
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -69,6 +70,14 @@ router.get('/geojson', function (req, res) {
 router.get('/search', function (req, res) {
     util.processRequest(req);
     search.search(req, res);
+})
+
+router.get('/reports', function (req, res) {
+    util.processRequest(req);
+    if (req.query.reportType) {
+        reports.get_all_geo_indicator_by_year(req, res);
+    }
+    
 })
 
 router.get('/schools', function (req, res) {

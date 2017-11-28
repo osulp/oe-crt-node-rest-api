@@ -19,7 +19,7 @@ exports.get_community_data_by_indicator = function (req, resp) {
                 httpMsgs.sendCSV(req, resp, data);
             } else {
                 var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
-                resp.render('dataTable', { title:"Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+                resp.render('dataTable', { title: "Community Data by Indicator Table", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
             }
         }
     });
@@ -73,6 +73,8 @@ exports.get_community_data_by_indicator_with_metadata = function (req, resp, vie
 
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, returnObj, settings.format);
+            } else if (settings.format === "csv") {
+                httpMsgs.sendCSV(req, resp, data);
             }
             else {
                 var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';

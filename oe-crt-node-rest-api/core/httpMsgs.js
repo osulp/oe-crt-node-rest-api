@@ -2,6 +2,8 @@
 var utilities = require("./utilities.js");
 var fs = require("fs");
 
+
+
 exports.show500 = function (req, resp, err) {
     if (settings.httpMsgsFormat === "HTML") {
         resp.writeHead(500, "Internal Error occurred", { "Content-Type": "text/html" });
@@ -31,13 +33,14 @@ exports.sendJson = function (req, resp, data, format) {
     resp.end();
 };
 
-exports.sendCSV = function (req, resp, data) {
+exports.sendCSV = function (req, resp, data, metadata) {
     if (data) {
         settings.headers['Content-Type'] = "text/csv";
-        settings.headers['Content-Disposition'] = 'attachment; filename=report.csv';
+        settings.headers['Content-Disposition'] = 'attachment; filename=' + metadata.filename + '.csv';
         resp.writeHead(200, settings.headers);
-        var csvData = utilities.ConvertToCSV(data);
+        var csvData = utilities.ConvertToCSV(data,metadata);
         resp.write(csvData);
+        settings.headers['Content-Disposition'] = null;
     }
     resp.end();
 };

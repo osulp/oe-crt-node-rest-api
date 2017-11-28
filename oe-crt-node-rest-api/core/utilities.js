@@ -70,24 +70,38 @@ exports.processRequest = function (req)
     settings.isJSONP = req.query.callback !== undefined ? true : false;
 }
 
-exports.ConvertToCSV = function (objArray) {
-    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+exports.ConvertToCSV = function (objArray, metadata) {
+    var data = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     var str = '';
+    str += "Report generated on " + Date() + '\r\n';
+    str += (metadata.reportTitle ? metadata.reportTitle : '' ) + '\r\n\r\n';
     var row = "";
-    for (var index in objArray[0]) {
-        //Now convert each value to string and comma-separated
-        row += index + ',';
-    }
+    var columns;
+    var counter = 0;
+    data.some(function (row) {
+        columns = Object.keys(row)
+        .sort(exports.sortAlphaNumeric);
+        return counter === 0;
+    });
+    columns.forEach(function (column) {
+        //table column headers
+        row +=  '"' + column + '",';
+    });
+
     row = row.slice(0, -1);
     //append Label row with line break
     str += row + '\r\n';
-    for (var i = 0; i < array.length; i++) {
-        var line = '';
-        for (var index in array[i]) {
-            if (line != '') line += ','
-            line += array[i][index];
-        }
+    data.forEach(function (row) {
+        line = '';
+        columns.forEach(function (key) {
+            line += line !== '' ? ',' : '';
+            //console.log('row key', row, key);
+            if (row[key]) {
+                var val = row[key].toString();
+                line += val === null ? '' : val.indexOf(',') !== -1 ? '\"' + val + '\"' : val;
+            }
+        });
         str += line + '\r\n';
-    }
+    });
     return str;
 }
