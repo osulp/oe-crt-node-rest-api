@@ -53,16 +53,34 @@ exports.isNumeric = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-exports.sortAlphaNumeric = function(a, b) {
-    var aA = a.replace(/[^a-zA-Z]/g, "").replace("MOE", "");
-    var bA = b.replace(/[^a-zA-Z]/g, "").replace("MOE", "");
-    if (aA === bA) {
-        var aN = parseInt(a.replace(/[^0-9]/g, ""), 10);
-        var bN = parseInt(b.replace(/[^0-9]/g, ""), 10);
-        return aN === bN ? 0 : aN > bN ? 1 : -1;
-    } else {
-        return aA > bA ? -1 : 1;
+exports.sortAlphaNumeric = function (a, b) {
+    // order primary columns first then sort the rest
+    if (b.toUpperCase() === "COMMUNITY") {
+        return 1000;
+    } else if (a.toUpperCase() === "COMMUNITY") {
+        return -1000;
     }
+    if (b.toUpperCase().indexOf("GEOID") !== -1) {
+        return 900;
+    } else if (a.toUpperCase().indexOf("GEOID") !== -1) {
+        return -900;
+    }
+    if (b.toUpperCase().indexOf("GEOTYPE") !== -1) {
+        return 800;
+    } else if (a.toUpperCase().indexOf("GEOTYPE") !== -1) {
+        return -800;
+    }
+    if (b.toUpperCase() === "YEAR") {
+        return 700;
+    } else if (a.toUpperCase() === "YEAR") {
+        return -700;
+    }
+    if (b.toUpperCase().indexOf("VARIABLE") !== -1) {
+        return 600;
+    } else if (a.toUpperCase().indexOf("VARIABLE") !== -1) {
+        return -600;
+    }
+    return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 }
 
 exports.processRequest = function (req)
@@ -81,6 +99,7 @@ exports.ConvertToCSV = function (objArray, metadata) {
     data.some(function (row) {
         columns = Object.keys(row)
         .sort(exports.sortAlphaNumeric);
+        //columns = exports.arrangeColumns(columns);
         return counter === 0;
     });
     columns.forEach(function (column) {

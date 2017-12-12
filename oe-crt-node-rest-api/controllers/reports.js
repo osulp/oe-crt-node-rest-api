@@ -13,7 +13,7 @@ exports.get_all_geo_indicator_by_year = function (req, resp) {
     switch (reportType) {
         case 'year_indicators':
         case 'year_variables':
-            sqlQuery = 'exec getAdminReport ' + reportType + ',null,' + req.query.year + ';';
+            sqlQuery = "exec getAdminReport '" + reportType + "',null,'" + req.query.year + "';";
             metadata.filename = reportType + '_' + req.query.year;
             metadata.reportTitle = reportType === 'year_indicators'
                 ? 'All indicators for year ' + req.query.year
@@ -21,7 +21,7 @@ exports.get_all_geo_indicator_by_year = function (req, resp) {
             break;
         case 'all_year_indicator':
         case 'all_year_variable':
-            sqlQuery = "exec getAdminReport " + reportType + ",'" + req.query.varIndicator + "',null;";
+            sqlQuery = "exec getAdminReport '" + reportType + "','" + req.query.varIndicator + "',null;";
             metadata.filename = req.query.varIndicator.replace(/\ /g,'');
             metadata.reportTitle = reportType === 'all_year_indicator'
                 ? 'All data for indicator: ' + req.query.varIndicator
