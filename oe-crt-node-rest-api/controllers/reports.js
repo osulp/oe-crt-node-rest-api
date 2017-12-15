@@ -22,7 +22,12 @@ exports.get_all_geo_indicator_by_year = function (req, resp) {
         case 'all_year_indicator':
         case 'all_year_variable':
             sqlQuery = "exec getAdminReport '" + reportType + "','" + req.query.varIndicator + "',null;";
-            metadata.filename = req.query.varIndicator.replace(/\ /g,'');
+            metadata.filename = req.query.varIndicator
+            .replace(/\ /g, '')
+            .replace(/\$/g, 'S')
+            .replace(/\,/g, '')
+            .replace(/\</g, 'lt')
+            .replace(/\>/g, 'gt');
             metadata.reportTitle = reportType === 'all_year_indicator'
                 ? 'All data for indicator: ' + req.query.varIndicator
                 : 'All data for variable data record: ' + req.query.varIndicator;

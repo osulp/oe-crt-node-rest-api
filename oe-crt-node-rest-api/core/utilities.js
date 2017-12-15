@@ -87,7 +87,7 @@ exports.processRequest = function (req)
 {
     settings.isJSONP = req.query.callback !== undefined ? true : false;
 }
-
+    
 exports.ConvertToCSV = function (objArray, metadata) {
     var data = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     var str = '';
