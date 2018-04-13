@@ -100,6 +100,9 @@ exports.get_indicator_desc_and_related = function (req, resp) {
             var returnObj = {};
             returnObj.Desc = data[0];
             returnObj.RelatedIndicators = data[1];
+            if (data.length > 2) {
+                returnObj.DrilldownIndicators = data[2];
+            }
             if (settings.format === "json" || settings.format === "pjson") {
                 httpMsgs.sendJson(req, resp, returnObj, settings.format);
             }
