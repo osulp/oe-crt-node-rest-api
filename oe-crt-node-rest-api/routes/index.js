@@ -27,6 +27,8 @@ router.get('/communityData', function (req, res) {
         communities.get_community_data_by_indicator_geoType(req, res);
     } else if (req.query.viewType !== undefined) {
         communities.get_community_data_by_indicator_with_metadata(req, res, req.query.viewType);
+    } else if (req.query.drilldown !== undefined) {
+        communities.get_indicator_drilldown_data(req, res);
     } else {
         communities.get_community_data_by_indicator(req, res);
     }
@@ -77,7 +79,7 @@ router.get('/reports', function (req, res) {
     if (req.query.reportType) {
         reports.get_all_geo_indicator_by_year(req, res);
     }
-    
+
 })
 
 router.get('/schools', function (req, res) {

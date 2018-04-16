@@ -84,6 +84,28 @@ exports.get_community_data_by_indicator_with_metadata = function (req, resp, vie
     });
 }
 
+exports.get_indicator_drilldown_data = function (req, resp) {
+    settings.format = req.query.f !== "undefined" ? req.query.f : "json";
+    var subtopic = req.query.subtopic !== undefined ? req.query.subtopic : null;
+    var geoid = req.query.geoid !== undefined ? req.query.geoid : null;
+    db.executeSql("exec getDrilldownIndicatorData_CRT '" + subtopic + "','" + geoid + "'", false,
+        function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        }
+        else {
+
+            if (settings.format === "json" || settings.format === "pjson") {
+                httpMsgs.sendJson(req, resp, data, settings.format);
+            }
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "Drilldown Indicator by Sub Topic By GEOID", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+            }
+        }
+    });
+}
+
 
 //exports.get_community_detailed_data_by_indicator_with_metadata = function (req, resp) {
 //    settings.format = req.query.f !== "undefined" ? req.query.f : "json";

@@ -87,6 +87,7 @@ exports.get_featured_indicators = function (req, resp) {
 
 }
 
+
 exports.get_indicator_desc_and_related = function (req, resp) {
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     var indicator = req.query.indicator !== undefined ? req.query.indicator : "%";
