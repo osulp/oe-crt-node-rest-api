@@ -40,7 +40,7 @@ exports.get_community_data_by_indicator_geoType = function (req, resp) {
             returnObj.GeoTypes = data[3];
             returnObj.Data = data[2];
             returnObj.GeoYears = data[4];
-            returnObj.RelatedIndicators = data.length > 5 ? data[5] : null;
+            returnObj.DrillDownIndicators = data.length > 5 ? data[5] : null;
             returnObj.SubTopicCategories = data.length > 6 ? data[6]: null;
             returnObj.TopicCategories = data.length > 7 ? data[7]: null;
 

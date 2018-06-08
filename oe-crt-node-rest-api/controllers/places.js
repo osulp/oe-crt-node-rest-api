@@ -25,6 +25,8 @@ exports.getPlaces = function (req, resp) {
 }
 
 exports.getPlaceInfo = function (req, resp) {
+    ///////////////////
+    // Can deprecate once code ported to support getPlaceInfoNameGeoid
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";
     db.executeSql("exec getPlaceInfo '" + req.query.place.replace(/\'/g, "''")  + "';", false,
         function (data, err) {
@@ -41,7 +43,25 @@ exports.getPlaceInfo = function (req, resp) {
             }
         }
     });
+}
 
+exports.getPlaceInfoNameGeoid = function (req, resp) {
+    settings.format = req.query.f !== "undefined" ? req.query.f : "json";
+    db.executeSql("exec getPlaceInfoByNameGeoid '" + req.query.place.replace(/\'/g, "''") + "','" + req.query.geoid + "','" + req.query.geoType + "';", false,
+        function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        }
+        else {
+            if (settings.format === "json" || settings.format === "pjson") {
+                httpMsgs.sendJson(req, resp, data, settings.format);
+            }
+            else {
+                var _stylePath = (process.env.virtualDirPath !== undefined ? 'public' : '') + '/stylesheets/style.css';
+                resp.render('dataTable', { title: "Get Place Info by Name or Geoid", table: utilities.tableMarkup(data, false, null), stylePath: _stylePath });
+            }
+        }
+    });
 }
 
 exports.get = function (req, resp, community) {

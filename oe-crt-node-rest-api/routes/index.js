@@ -52,8 +52,12 @@ router.get('/topics', function (req, res){
 
 router.get('/places', function (req, res) {
     util.processRequest(req);
-    if (req.query.place !== undefined) {
-        places.getPlaceInfo(req, res);
+    if (req.query.place) {
+        if (req.query.geoid && req.query.geoType) {
+            places.getPlaceInfoNameGeoid(req,res)
+        } else {
+            places.getPlaceInfo(req, res);
+        }
     } else {
         places.getPlaces(req, res);
     }
