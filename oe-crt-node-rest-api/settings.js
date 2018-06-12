@@ -1,13 +1,13 @@
 ﻿exports.dbConfig = {
     "user": 'RuralAdmin',
     "password": 'Rural!$OutThere',
-    "server": 'lib-mssql1.library.oregonstate.edu', // You can use 'localhost\\instance' to connect to named instance 
+    "server": 'lib-mssql1.library.oregonstate.edu', // You can use 'localhost\\instance' to connect to named instance
     "port": "1434",
-    "database": 'community_reporter_4_1',
-    //stream: true, // You can enable streaming globally 
-    
+    "database": 'community_reporter_5',
+    //stream: true, // You can enable streaming globally
+
     "options": {
-        //encrypt: true // Use this if you're on Windows Azure 
+        //encrypt: true // Use this if you're on Windows Azure
     }
 }
 // add needed headers
