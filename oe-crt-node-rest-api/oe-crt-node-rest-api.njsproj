@@ -31,12 +31,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="controllers\geojson.js" />
+    <Compile Include="controllers\placetypes.js" />
+    <Compile Include="controllers\reports.js" />
     <Compile Include="controllers\search_places_indicators.js" />
     <Compile Include="controllers\topics.js" />
     <Compile Include="controllers\indicators.js" />
     <Compile Include="controllers\places.js" />
     <Compile Include="controllers\collections.js" />
     <Compile Include="controllers\community_data_by_indicator.js" />
+    <Compile Include="controllers\school_data.js" />
     <Compile Include="core\utilities.js" />
     <Compile Include="core\httpMsgs.js" />
     <Compile Include="core\db.js" />
