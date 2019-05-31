@@ -6,7 +6,7 @@ var format = "json";
 
 exports.get = function (req, resp) {       
     settings.format = req.query.f !== "undefined" ? req.query.f : "json";    
-    let sql = "exec getCollections " + (req.query.featured ? req.query.featured : 1) + ";";
+    var sql = "exec getCollections " + (req.query.featured ? req.query.featured : 1) + ";";
         db.executeSql(sql, false,
         function (data, err) {
         if (err) {
